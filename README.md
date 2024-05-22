@@ -4,7 +4,8 @@
 
 I am a  student at Missouri State University, currently pursuing a Bachelor of Science degree in Computer Science and Mathematics. With a strong passion for technology and a drive to make a positive impact.
 
-Skills: C++/python / HTML / CSS/Javascript
+## Skills
+💻 C++ / python / HTML / CSS/Javascript
 
 - 🔭 I’m currently working on  couple projects 
 
