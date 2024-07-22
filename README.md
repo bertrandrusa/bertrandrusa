@@ -2,8 +2,8 @@
 #### Student to design and develop
 ![Student to design and develop](https://media.licdn.com/dms/image/D4D16AQHMim12AgDmBQ/profile-displaybackgroundimage-shrink_350_1400/0/1687419373915?e=1721865600&v=beta&t=VQUDzHDkKE6e9FmDnJn80VRbrPTEYcia-ptnCMlQdcI)
 
-I am a  student at Missouri State University, currently pursuing a Bachelor of Science degree in Computer Science and Mathematics. With a strong passion for technology and a drive to make a positive impact." DO WHAT YOU LOVE, LOVE WHAT YOU DO."
- ## "Everybody can learn to code but i want to be a problem solver"
+I am a  student at Missouri State University, currently pursuing a Bachelor of Science degree in Computer Science and Mathematics. With a strong passion for technology and a drive to make a positive impact."Everybody can learn to code but i want to be a problem solver."
+ ## "DO WHAT YOU LOVE, LOVE WHAT YOU DO."
 ## Skills
 💻 C++ / python / HTML / CSS/Javascript
 
