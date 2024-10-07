@@ -13,31 +13,34 @@ I am a student at Missouri State University, pursuing a Bachelor of Science in C
 [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/bertrand-rusanganwa-433607276/)  [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg' alt='instagram' height='40'>](https://www.instagram.com/bertrand_rusa/)  
 
 
-### **1. Lexing (Lexical Analysis)**
-- **Lexing Process**: The first step in a compiler or interpreter, where the **source code** is broken into **tokens** (smallest meaningful units).
-- **Tokens**: These represent keywords, identifiers, operators, literals, and punctuation marks found in the source code.
-- **Key Term**: **Lexeme** is the actual sequence of characters that form a token (e.g., `int`, `main`, `=`).
-### **2. Finite State Machine (FSM)**
-- **FSM in Lexing**: Lexing is typically handled by a **Finite State Machine (FSM)**, where the program transitions between states based on the input characters to recognize tokens.
-- **State and Transitions**: The FSM can change from one state to another based on input (e.g., going from an initial state to an identifier state when recognizing variable names).
-### **3. Lexeme Token Categories**
-- **Single-Character Tokens**: Operators like `+`, `-`, `(`, `)`, etc.
-- **Multi-Character Tokens**: Compound operators like `==`, `<=`.
-- **Comments**: Handled as `/* ... */` or `// ...`.
-- **Literals**: Strings and numbers.
--**Reserved Keyword**s: Words like int, while, let that are predefined in the language
-### **4. Tokenizing Rules**
-- **Maximal Munch Rule**: Always consume the largest possible valid lexeme. For example, `==` is tokenized as a single **EqualEqual** token, not two separate **Equal** tokens.
-- **Example**: In the statement `let lettuce = ...`, `let` would be recognized as a keyword, `lettuce` as an identifier, and `=` as an assignment operator.
-### **5. Lexing with Regular Expressions**
-- **Regular Expressions**: Lexers often use regular expressions to define patterns for different tokens.
-- **Example Patterns**:
-  - Identifier: `Letter (Letter | Digit)*`
-  - Number: `Digit+` or `Digit* . Digit+`.
-  - Reserved Keywords: Patterns like `if`, `while`, `for` are explicitly recognized.
-### **6. Designing a Lexer**
-- **Manual (Ad-hoc) Lexer**: You can write your own lexer using switch statements or conditional logic to recognize tokens.
-- **Tools for Lexing**: Alternatively, tools like **ANTLR**, **Lex**, or **Flex** can automatically generate a lexer from regular expressions.
-### **8. Abstract Syntax Tree (AST)**
-- **AST**: After lexing, the tokens are passed to the parser, which organizes them into an **Abstract Syntax Tree (AST)** representing the program’s structure and logic.
-
+### **1. Regular Expressions Basics**
+- **Regular Expressions**: Describe languages using a combination of characters and operators.
+- **Operators**: 
+  - **Concatenation**: `R1R2`
+  - **Union**: `R1 ∪ R2` or `|`
+  - **Kleene Star**: `R*` (zero or more repetitions)
+  - **Parentheses**: `(R)` for grouping.
+### **2. Atomic Regular Expressions**
+- **Ø**: Represents the empty language.
+- **a**: Represents the language `{a}`.
+- **ε**: Represents the language containing just the empty string `{ε}`.
+### **3. Compound Regular Expressions**
+- **Concatenation**: `R1R2` combines the languages of `R1` and `R2`.
+- **Union**: `R1 ∪ R2` combines both languages.
+- **Kleene Closure**: `R*` allows concatenating zero or more repetitions of `R`.
+### **4. Precedence of Operators**
+- **Highest to Lowest**: `(R)`, `R*`, `R1R2`, `R1 ∪ R2`.
+- Example: In `ab*c ∪ d`, `b*` applies to `b` before `∪ d`.
+### **5. Examples**
+- **ab*c ∪ d**: Describes strings like `ac`, `abc`, `abbc`, `d`.
+- **booo***: Describes `boo`, `booo`, `boooo`, etc.
+- **candy!(candy!)*:** Matches `candy!`, `candy!candy!`, and so on.
+### **6. Shorthand Notations**
+- **R?**: Equivalent to `(R ∪ ε)` (zero or one occurrence).
+- **R⁺**: Equivalent to `RR*` (one or more occurrences).
+- **Rn**: Equivalent to repeating `R` **n** times.
+### **7. Closure Properties of Regular Languages**
+- Regular languages are closed under **union**, **concatenation**, **Kleene star**, **intersection**, and **complementation**.
+### **8. Regular Expression Examples**
+- **ΣΣΣΣ**: Matches strings of length 4 over alphabet Σ (e.g., `aaaa`, `abab`).
+- **Σ*aΣ***: Matches strings with at most one `a`.
