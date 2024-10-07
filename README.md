@@ -13,35 +13,35 @@ I am a student at Missouri State University, pursuing a Bachelor of Science in C
 [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/bertrand-rusanganwa-433607276/)  [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg' alt='instagram' height='40'>](https://www.instagram.com/bertrand_rusa/)  
 
 
-Here’s a **cheat sheet** based on the requested slides from **Conversions Between RE and FSM** and **Proof of Regular/Non-Regular Languages**:
 ### **1. NFA → DFA Conversion (Subset Construction)**
-- **Subset Construction**:
-  - Start with the ε-closure of the NFA's start state as the DFA's start state.
-  - For each input symbol, find the set of reachable states (ε-closure) from the current set of states.
-  - Repeat this process for all states and inputs until no new states are found.
-  - Each DFA state represents a **set of NFA states**.
-### **2. Thompson’s Algorithm (RE to NFA)**
-- **Thompson Construction**:
-  - **Single Character**: Create a simple two-state NFA with the character as the transition.
-  - **Concatenation (R1R2)**: Connect the NFA of `R1` to `R2` by linking `R1`'s accept state to `R2`'s start state.
-  - **Union (R1 ∪ R2)**: Create a new start state with ε-transitions to the start states of `R1` and `R2`. Merge their accept states.
-  - **Kleene Star (R*)**: Add ε-transitions from the accept state back to the start state, with an option to skip the NFA altogether via an ε-transition.
-### **3. Subset Construction (NFA → DFA)**
+Here’s a **simplified cheat sheet** for **Conversion Between Finite Automata (FA) and Regular Expressions (RE)**:
+### **1. NFA → DFA Conversion (Subset Construction)**
+- **Goal**: Convert an **NFA** (which can have multiple paths and ε-transitions) into a **DFA** (which can’t).
 - **Steps**:
-  - Start from the ε-closure of the NFA start state.
-  - For each input symbol, move to the set of states that can be reached (ε-closure).
-  - This process continues until every possible state combination is explored.
-  - The result is a DFA where each state represents a **subset of NFA states**
-### **4. Using Closure Properties to Show Regular Languages**
-- **Closure Properties**:
-  - Regular languages are **closed** under:
-    - **Union**: If `L1` and `L2` are regular, so is `L1 ∪ L2`.
-    - **Concatenation**: If `L1` and `L2` are regular, so is `L1L2`.
-    - **Kleene Star**: If `L` is regular, so is `L*`.
-    - **Intersection and Complementation**: Regular languages are also closed under these operations.
-
-### **5. Building Regular Expressions for Specific Languages**
-- **Example: Language L = { w ∈ Σ* | w contains aa as a substring }**:
-  - Regular expression: `(a ∪ b)* aa (a ∪ b)*`.
-- **Example: Language L = { w ∈ Σ* | |w| = 4 }**:
-  - Regular expression: `ΣΣΣΣ` (four repetitions of any symbol from Σ).
+  1. Start with the **ε-closure** (all reachable states without consuming input) of the NFA's **start state** as the DFA's start state.
+  2. For each input symbol, check where the NFA can move and record those states.
+  3. Every set of NFA states becomes a **DFA state**.
+  4. Continue until no new DFA states are needed.
+### **2. Thompson’s Algorithm (RE to NFA)**
+- **Purpose**: Convert a regular expression into an NFA using simple building blocks.
+- **Steps**:
+  - **Single Character (a)**: Create a two-state NFA, with `a` as the transition between them.
+  - **Concatenation (R1R2)**: Connect the NFA for `R1` to the NFA for `R2`.
+  - **Union (R1 ∪ R2)**: Create a new start state and accept state, and add ε-transitions to both `R1` and `R2`.
+  - **Kleene Star (R*)**: Add ε-transitions to loop from the accept state back to the start, and an ε-transition to skip the entire NFA
+### **3. Subset Construction (NFA → DFA)**
+- **Key Idea**: Treat **each set of NFA states** as a single DFA state.
+- **Steps**:
+  1. Start at the **ε-closure** of the NFA’s start state.
+  2. For each input, move to all reachable states and treat this as a new DFA state.
+  3. Repeat for all inputs and states until the DFA is fully built.
+### **4. Regular Expression to NFA Quick Guide**
+- **a**: NFA for the character `a`.
+- **R1R2**: Concatenate the NFAs for `R1` and `R2`.
+- **R1 ∪ R2**: Use ε-transitions to create a choice between `R1` and `R2`.
+- **R***: Add ε-loops to repeat the NFA, allowing zero or more occurrences.
+### **5. Key Concepts**
+- **ε-Closure**: All states that can be reached by ε-transitions.
+- **Concatenation**: Combine two NFAs one after the other.
+- **Union**: Split the path between two NFAs.
+- **Kleene Star**: Allows repeating the NFA or skipping it entirely.
