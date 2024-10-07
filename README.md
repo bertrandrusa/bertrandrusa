@@ -12,121 +12,89 @@ I am a student at Missouri State University, pursuing a Bachelor of Science in C
 
 [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/bertrand-rusanganwa-433607276/)  [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg' alt='instagram' height='40'>](https://www.instagram.com/bertrand_rusa/)  
 
-Here’s a **cheat sheet for Finite Automata** focused on key concepts, examples, and diagrams:
+Here’s a focused cheat sheet for **Finite Automata** based on the difficult-to-remember parts from your slides:
 
 ---
 
-### **Finite Automata (FA)**
-
-1. **Definition**:
-   - A Finite Automaton (FA) is a machine with a **finite number of states** used to recognize patterns within input strings.
-   - **Types**:
-     - **Deterministic Finite Automaton (DFA)**: Exactly one transition per input symbol.
-     - **Non-deterministic Finite Automaton (NFA)**: Can have multiple transitions for a single input, including ε (empty) transitions【41†source】【44†source】.
-
----
-
-### **Components of FA**:
-- **States (Q)**: A finite set of states.
-- **Alphabet (Σ)**: A finite set of symbols.
-- **Transition Function (δ)**: Describes transitions between states based on input symbols.
-- **Start State (q₀)**: The state where the machine begins.
-- **Accept State (F)**: One or more accepting states that define when a string is accepted【41†source】.
+### **1. Deterministic Finite Automaton (DFA)**
+- **Key Characteristic**: For each state in a DFA, there must be **exactly one transition** for every symbol in the alphabet Σ【27†source】.
+- **Unique Start State**: DFAs have a single start state and can have multiple accept states【27†source】.
+- **Formal Definition**: \( DFA = (Q, Σ, δ, q_0, F) \)
+  - \( Q \): Set of states.
+  - \( Σ \): Alphabet (set of input symbols).
+  - \( δ \): Transition function (maps a state and input to another state).
+  - \( q_0 \): Initial state.
+  - \( F \): Set of accept states【27†source】.
 
 ---
 
-### **DFA (Deterministic Finite Automaton)**:
-- **Characteristics**:
-  - For each state and input symbol, there is exactly **one transition**.
-  - No ε-moves (empty transitions).
-  - Accepts a string if it ends in an accept state.
-- **Formal Definition**:
-  - A DFA can be described as a 5-tuple: (Q, Σ, δ, q₀, F).
-- **Example**:
-  - DFA to recognize strings ending in `00`:
-    - Q = {S1, S2, S3}
-    - Σ = {0, 1}
-    - δ(S1, 0) = S2, δ(S2, 0) = S3, δ(S3, 0) = S3, δ(S3, 1) = S2, etc.
-    - Start State = S1, Accept State = S3【41†source】.
+### **2. Non-Deterministic Finite Automaton (NFA)**
+- **Multiple Transitions**: NFAs can have **multiple transitions** for the same input symbol, and even **ε-transitions**, which do not consume any input【27†source】.
+- **Acceptance**: An NFA accepts a string if **any one of its paths** ends in an accept state【27†source】.
+- **Key Concept**: NFAs can have branches where some branches might accept and others reject, but the NFA accepts if any branch leads to an accept state【27†source】.
 
 ---
 
-### **NFA (Non-deterministic Finite Automaton)**:
-- **Characteristics**:
-  - Can have **multiple transitions** for the same input from a state.
-  - Can have **ε-moves**, where the machine transitions without consuming an input.
-  - Accepts a string if **any** transition path leads to an accept state.
-- **Formal Definition**:
-  - NFA is also described by a 5-tuple: (Q, Σ, δ, q₀, F), but δ can return **multiple states** for a given input or ε-moves.
-- **Example**:
-  - NFA to recognize strings containing `01`:
-    - Q = {S1, S2, S3}
-    - Σ = {0, 1}
-    - δ(S1, 0) = {S2}, δ(S2, 1) = {S3}, ε-moves possible【41†source】.
+### **3. Key Differences: DFA vs NFA**
+
+| Feature               | **DFA**                         | **NFA**                                      |
+|-----------------------|---------------------------------|----------------------------------------------|
+| Transitions per state  | One transition per input symbol | Multiple transitions, including ε-transitions |
+| ε-transitions          | Not allowed                    | Allowed                                      |
+| Acceptance             | Accepts if ends in an accept state | Accepts if **any path** ends in an accept state【27†source】 |
 
 ---
 
-### **DFA vs NFA**:
-- **DFA**:
-  - One transition per input.
-  - No ε-moves.
-  - Always in one specific state at a time.
-- **NFA**:
-  - Multiple transitions for one input are allowed.
-  - Can have ε-moves.
-  - Can be in multiple states at the same time.
-- **Equivalence**: Every NFA can be converted to a DFA, but the DFA might have more states【41†source】【44†source】.
+### **4. Language of a DFA**
+- **Formal Language Definition**: A language \( L \) over Σ is the set of strings that can be processed by a DFA and result in acceptance【27†source】.
+- **Formal Notation**: \( ℒ(D) = \{ w \in Σ^* | D \text{ accepts } w \} \)
+  - This represents all strings that the DFA accepts【27†source】.
 
 ---
 
-### **Key Conversions**:
+### **5. Transition Process (DFA/NFA)**
 
-#### **NFA to DFA Conversion (Subset Construction)**:
-- **Process**:
-  - Each DFA state represents a **set of NFA states**.
-  - Compute the ε-closure of states (set of all states reachable via ε-transitions).
-  - For each input symbol, determine the set of reachable NFA states.
-- **Example**:
-  - If NFA states S1 and S2 can be reached on input `a`, create a DFA state representing {S1, S2}【40†source】.
+1. **Start at the Initial State**: Begin at the start state.
+2. **Process Input**: For each input symbol, follow the transition to the next state【27†source】.
+3. **Check Acceptance**: If the final state after processing the entire string is an accept state, the string is accepted【27†source】.
 
 ---
 
-### **Closure Properties of Finite Automata**:
-- Regular languages (recognized by FA) are closed under:
-  - **Union**: Combine two FA using a new start state with ε-transitions.
-  - **Concatenation**: Connect the accept states of one FA to the start state of another.
-  - **Kleene Star**: Add ε-transitions from accept states back to the start state【44†source】.
+### **6. Automaton Structure**
+- **States and Transitions**: Each circle represents a state. Arrows represent transitions between states【27†source】.
+- **Accept States**: Depicted by double circles. A string is accepted if it ends in one of these states【27†source】.
+- **Example**: For a string `101001`:
+  - Process each bit starting from the initial state and move through the DFA/NFA transitions to determine if the final state is an accept state【27†source】.
 
 ---
 
-### **Regular Languages**:
-- A **regular language** is one that can be recognized by a DFA or NFA.
-- **Regular Expressions (RE)** describe regular languages, and every RE can be converted into an NFA【44†source】.
+### **7. Epsilon (ε) Transitions (NFA)**
+- **Key Feature**: NFAs can transition between states without consuming any input using ε-transitions【27†source】.
+- **Behavior**: The NFA may follow an ε-transition at any time but is not required to do so【27†source】.
+- **Impact**: This can lead to multiple possible states being active simultaneously【27†source】.
 
 ---
 
-### **Important Theorems**:
-- **Kleene's Theorem**: A language is regular if and only if it can be recognized by a finite automaton.
-- **Pumping Lemma**: Used to prove that certain languages are not regular by showing that for large enough strings, a portion of the string can be "pumped" (repeated)【44†source】.
+### **8. Recognizing Languages with DFA**
+- **DFA Language Recognition**: A DFA recognizes a **regular language**, and every regular language can be recognized by a DFA【27†source】.
+- **Example Tasks**:
+  - Create a DFA to accept strings with two consecutive zeros.
+  - Create a DFA to accept strings that start or end with `00`【27†source】.
 
 ---
 
-### **Key Examples**:
-
-#### **DFA Example**:
-Recognize binary strings that end in `00`:
-- **States**: S1 (start), S2 (after reading 0), S3 (after reading 00).
-- **Transitions**:
-  - δ(S1, 0) → S2, δ(S2, 0) → S3.
-  - Accept State: S3.
-
-#### **NFA Example**:
-Recognize binary strings that contain `01`:
-- **States**: S1 (start), S2 (after reading 0), S3 (after reading 01).
-- **Transitions**:
-  - δ(S1, 0) → S2, δ(S2, 1) → S3.
-  - Accept State: S3【41†source】【44†source】.
+### **9. Closure Properties of Regular Languages**
+- **Key Properties**:
+  - Regular languages are closed under **complementation**, **union**, **intersection**, and **Kleene star**【27†source】.
+  - **Complement**: If \( L \) is regular, then \( L' \) (the complement of \( L \)) is also regular【27†source】.
 
 ---
 
-This cheat sheet includes the essential concepts and examples for finite automata. Make sure to focus on the differences between DFA and NFA, conversion steps, and some small examples for your reference!
+### **10. Non-Deterministic to Deterministic Conversion (NFA to DFA)**
+- **Subset Construction**: Convert an NFA to a DFA by treating each set of NFA states as a single DFA state【27†source】.
+  - **Key Process**: For each state in the DFA, determine the set of states the NFA could be in after processing an input symbol. Repeat until no new DFA states are found.
+
+---
+
+This cheat sheet highlights the difficult-to-remember concepts from the **Finite Automata** slides. These are crucial for understanding how automata work and what sets DFAs apart from NFAs.
+
