@@ -13,34 +13,35 @@ I am a student at Missouri State University, pursuing a Bachelor of Science in C
 [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/bertrand-rusanganwa-433607276/)  [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg' alt='instagram' height='40'>](https://www.instagram.com/bertrand_rusa/)  
 
 
-### **1. Regular Expressions Basics**
-- **Regular Expressions**: Describe languages using a combination of characters and operators.
-- **Operators**: 
-  - **Concatenation**: `R1R2`
-  - **Union**: `R1 ∪ R2` or `|`
-  - **Kleene Star**: `R*` (zero or more repetitions)
-  - **Parentheses**: `(R)` for grouping.
-### **2. Atomic Regular Expressions**
-- **Ø**: Represents the empty language.
-- **a**: Represents the language `{a}`.
-- **ε**: Represents the language containing just the empty string `{ε}`.
-### **3. Compound Regular Expressions**
-- **Concatenation**: `R1R2` combines the languages of `R1` and `R2`.
-- **Union**: `R1 ∪ R2` combines both languages.
-- **Kleene Closure**: `R*` allows concatenating zero or more repetitions of `R`.
-### **4. Precedence of Operators**
-- **Highest to Lowest**: `(R)`, `R*`, `R1R2`, `R1 ∪ R2`.
-- Example: In `ab*c ∪ d`, `b*` applies to `b` before `∪ d`.
-### **5. Examples**
-- **ab*c ∪ d**: Describes strings like `ac`, `abc`, `abbc`, `d`.
-- **booo***: Describes `boo`, `booo`, `boooo`, etc.
-- **candy!(candy!)*:** Matches `candy!`, `candy!candy!`, and so on.
-### **6. Shorthand Notations**
-- **R?**: Equivalent to `(R ∪ ε)` (zero or one occurrence).
-- **R⁺**: Equivalent to `RR*` (one or more occurrences).
-- **Rn**: Equivalent to repeating `R` **n** times.
-### **7. Closure Properties of Regular Languages**
-- Regular languages are closed under **union**, **concatenation**, **Kleene star**, **intersection**, and **complementation**.
-### **8. Regular Expression Examples**
-- **ΣΣΣΣ**: Matches strings of length 4 over alphabet Σ (e.g., `aaaa`, `abab`).
-- **Σ*aΣ***: Matches strings with at most one `a`.
+Here’s a **cheat sheet** based on the requested slides from **Conversions Between RE and FSM** and **Proof of Regular/Non-Regular Languages**:
+### **1. NFA → DFA Conversion (Subset Construction)**
+- **Subset Construction**:
+  - Start with the ε-closure of the NFA's start state as the DFA's start state.
+  - For each input symbol, find the set of reachable states (ε-closure) from the current set of states.
+  - Repeat this process for all states and inputs until no new states are found.
+  - Each DFA state represents a **set of NFA states**.
+### **2. Thompson’s Algorithm (RE to NFA)**
+- **Thompson Construction**:
+  - **Single Character**: Create a simple two-state NFA with the character as the transition.
+  - **Concatenation (R1R2)**: Connect the NFA of `R1` to `R2` by linking `R1`'s accept state to `R2`'s start state.
+  - **Union (R1 ∪ R2)**: Create a new start state with ε-transitions to the start states of `R1` and `R2`. Merge their accept states.
+  - **Kleene Star (R*)**: Add ε-transitions from the accept state back to the start state, with an option to skip the NFA altogether via an ε-transition.
+### **3. Subset Construction (NFA → DFA)**
+- **Steps**:
+  - Start from the ε-closure of the NFA start state.
+  - For each input symbol, move to the set of states that can be reached (ε-closure).
+  - This process continues until every possible state combination is explored.
+  - The result is a DFA where each state represents a **subset of NFA states**
+### **4. Using Closure Properties to Show Regular Languages**
+- **Closure Properties**:
+  - Regular languages are **closed** under:
+    - **Union**: If `L1` and `L2` are regular, so is `L1 ∪ L2`.
+    - **Concatenation**: If `L1` and `L2` are regular, so is `L1L2`.
+    - **Kleene Star**: If `L` is regular, so is `L*`.
+    - **Intersection and Complementation**: Regular languages are also closed under these operations.
+
+### **5. Building Regular Expressions for Specific Languages**
+- **Example: Language L = { w ∈ Σ* | w contains aa as a substring }**:
+  - Regular expression: `(a ∪ b)* aa (a ∪ b)*`.
+- **Example: Language L = { w ∈ Σ* | |w| = 4 }**:
+  - Regular expression: `ΣΣΣΣ` (four repetitions of any symbol from Σ).
