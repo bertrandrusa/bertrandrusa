@@ -16,85 +16,42 @@ Here’s a focused cheat sheet for **Finite Automata** based on the difficult-to
 
 ---
 
-### **1. Deterministic Finite Automaton (DFA)**
-- **Key Characteristic**: For each state in a DFA, there must be **exactly one transition** for every symbol in the alphabet Σ【27†source】.
-- **Unique Start State**: DFAs have a single start state and can have multiple accept states【27†source】.
-- **Formal Definition**: \( DFA = (Q, Σ, δ, q_0, F) \)
-  - \( Q \): Set of states.
-  - \( Σ \): Alphabet (set of input symbols).
-  - \( δ \): Transition function (maps a state and input to another state).
-  - \( q_0 \): Initial state.
-  - \( F \): Set of accept states【27†source】.
+Here’s the refined cheat sheet with **only answers**:
 
 ---
 
-### **2. Non-Deterministic Finite Automaton (NFA)**
-- **Multiple Transitions**: NFAs can have **multiple transitions** for the same input symbol, and even **ε-transitions**, which do not consume any input【27†source】.
-- **Acceptance**: An NFA accepts a string if **any one of its paths** ends in an accept state【27†source】.
-- **Key Concept**: NFAs can have branches where some branches might accept and others reject, but the NFA accepts if any branch leads to an accept state【27†source】.
-
----
-
-### **3. Key Differences: DFA vs NFA**
-
-| Feature               | **DFA**                         | **NFA**                                      |
-|-----------------------|---------------------------------|----------------------------------------------|
-| Transitions per state  | One transition per input symbol | Multiple transitions, including ε-transitions |
-| ε-transitions          | Not allowed                    | Allowed                                      |
-| Acceptance             | Accepts if ends in an accept state | Accepts if **any path** ends in an accept state【27†source】 |
-
----
-
-### **4. Language of a DFA**
-- **Formal Language Definition**: A language \( L \) over Σ is the set of strings that can be processed by a DFA and result in acceptance【27†source】.
-- **Formal Notation**: \( ℒ(D) = \{ w \in Σ^* | D \text{ accepts } w \} \)
-  - This represents all strings that the DFA accepts【27†source】.
-
----
-
-### **5. Transition Process (DFA/NFA)**
-
-1. **Start at the Initial State**: Begin at the start state.
-2. **Process Input**: For each input symbol, follow the transition to the next state【27†source】.
-3. **Check Acceptance**: If the final state after processing the entire string is an accept state, the string is accepted【27†source】.
-
----
-
-### **6. Automaton Structure**
-- **States and Transitions**: Each circle represents a state. Arrows represent transitions between states【27†source】.
-- **Accept States**: Depicted by double circles. A string is accepted if it ends in one of these states【27†source】.
-- **Example**: For a string `101001`:
-  - Process each bit starting from the initial state and move through the DFA/NFA transitions to determine if the final state is an accept state【27†source】.
-
----
-
-### **7. Epsilon (ε) Transitions (NFA)**
-- **Key Feature**: NFAs can transition between states without consuming any input using ε-transitions【27†source】.
-- **Behavior**: The NFA may follow an ε-transition at any time but is not required to do so【27†source】.
-- **Impact**: This can lead to multiple possible states being active simultaneously【27†source】.
-
----
-
-### **8. Recognizing Languages with DFA**
-- **DFA Language Recognition**: A DFA recognizes a **regular language**, and every regular language can be recognized by a DFA【27†source】.
-- **Example Tasks**:
-  - Create a DFA to accept strings with two consecutive zeros.
-  - Create a DFA to accept strings that start or end with `00`【27†source】.
-
----
-
-### **9. Closure Properties of Regular Languages**
-- **Key Properties**:
-  - Regular languages are closed under **complementation**, **union**, **intersection**, and **Kleene star**【27†source】.
-  - **Complement**: If \( L \) is regular, then \( L' \) (the complement of \( L \)) is also regular【27†source】.
-
----
-
-### **10. Non-Deterministic to Deterministic Conversion (NFA to DFA)**
-- **Subset Construction**: Convert an NFA to a DFA by treating each set of NFA states as a single DFA state【27†source】.
-  - **Key Process**: For each state in the DFA, determine the set of states the NFA could be in after processing an input symbol. Repeat until no new DFA states are found.
-
----
-
-This cheat sheet highlights the difficult-to-remember concepts from the **Finite Automata** slides. These are crucial for understanding how automata work and what sets DFAs apart from NFAs.
-
+### **1. Key Differences: DFA vs NFA**
+- In a DFA, for every state and every input symbol, there is **exactly one** transition.
+- In an NFA, a state can have **multiple transitions** for the same input symbol, including ε-transitions that don’t consume input.
+- An NFA accepts a string if **any one of the possible paths** leads to an accept state.
+- A DFA can simulate an NFA using **subset construction**. Each DFA state represents a set of NFA states, and the DFA transitions reflect where the NFA could be after reading an input symbol.
+### **2. Formal Definitions**
+- **DFA Formal Definition**: 
+  - \( DFA = (Q, Σ, δ, q_0, F) \)
+    - \( Q \): Set of states.
+    - \( Σ \): Input alphabet.
+    - \( δ \): Transition function where every input symbol leads to exactly one state.
+    - \( q_0 \): Start state.
+    - \( F \): Set of accept states.
+- **NFA Formal Definition**:
+  - \( NFA = (Q, Σ, δ, q_0, F) \)
+    - \( δ \): Transition function where each input can lead to **multiple states**, including ε-transitions.
+- In a DFA, there can only be **one unique transition** for each input symbol from each state.
+- The ε-transition in an NFA allows it to change states without consuming any input symbol.
+### **3. Acceptance of a String**
+- A DFA accepts a string if, after processing all symbols, it ends in an **accept state**.
+- An NFA accepts a string if **any of the possible paths** leads to an accept state.
+- The NFA explores all possible transitions for the input. It accepts the string if **any path** leads to an accept state, regardless of what happens on other paths.
+- If an NFA doesn’t accept a string, it means **none** of the paths from the start state to the accept state are valid for that input string.
+### **4. Handling Transitions**
+- In a DFA, only **one transition** per input symbol is allowed from each state.
+- NFAs can have **multiple transitions** for the same input symbol from the same state, as well as ε-transitions.
+- DFAs do not allow ε-transitions. Every input symbol must trigger a defined transition.
+- An NFA can always explore all possible paths, and if one of them leads to an accept state, it will accept the string.
+### **5. Regular Language Recognition**
+- The languages recognized by DFAs and NFAs are the same; they both recognize **regular languages**. Any NFA can be converted to an equivalent DFA.
+- NFAs can be **more compact** and simpler to design for certain languages, even though they can be converted to DFAs lat
+### **6. Transition Table and State Diagram**
+- In a DFA transition table, each state has exactly one outgoing transition for each symbol in the alphabet.
+- In an NFA transition table, each state can have multiple transitions for the same symbol or ε-transitions.
+- When there are multiple states for a single input in an NFA transition table, it means the NFA can transition to **any of those states** upon reading the input, and all paths must be considered.
